@@ -59,12 +59,41 @@ namespace winform_real_server
                 data = Encoding.Default.GetString(bytes, 0, length);// 데이터 수신
                 //sss.Add(string.Format("수신 : {0} ", data));
                 textBox2.Text = data;
-                if (data == "ㅎㅇ")
+
+                string Ddta, Ddta2;
+                Ddta = data.Substring(0, 4);
+                Ddta2 = data.Substring(4, 1);
+
+                if (Ddta == "{{#!") // 모델 프로토콜
                 {
-                    data = "는 하이";
-                    byte[] msg = Encoding.Default.GetBytes(data);
-                    stream.Write(msg, 0, msg.Length); // 데이터 송신
-                    textBox3.Text = data;
+                    if(Ddta2 == "!") // 모델 insert
+                    {
+                        data = "insert 받았습니다~";
+                        byte[] msg = Encoding.Default.GetBytes(data);
+                        stream.Write(msg, 0, msg.Length); // 데이터 송신
+                        textBox3.Text = data;
+                    }
+                    else if(Ddta2 == "@") // 모델 delete
+                    {
+                        data = "delete 받았습니다~";
+                            byte[] msg = Encoding.Default.GetBytes(data);
+                        stream.Write(msg, 0, msg.Length); // 데이터 송신
+                        textBox3.Text = data;
+                    }
+                    else if(Ddta2 == "#") // 모델 update
+                    {
+                        data = "update 받았습니다~";
+                        byte[] msg = Encoding.Default.GetBytes(data);
+                        stream.Write(msg, 0, msg.Length); // 데이터 송신
+                        textBox3.Text = data;
+                    }
+                    else if(Ddta2 == "$") // 모델 select
+                    {
+                        data = "select 받았습니다~";
+                        byte[] msg = Encoding.Default.GetBytes(data);
+                        stream.Write(msg, 0, msg.Length); // 데이터 송신
+                        textBox3.Text = data;
+                    }
                 }
                 else if (data == "ㅂㅇ")
                 {
