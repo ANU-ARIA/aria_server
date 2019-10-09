@@ -14,7 +14,7 @@ namespace WinForm_server
 {
     public partial class Form1 : Form
     {
-        public static int bb = Convert.ToInt32(600);
+        public static int bb = Convert.ToInt32(603);
         public Form1()
         {
             InitializeComponent();
