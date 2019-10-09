@@ -25,7 +25,7 @@ namespace winform_real_server
         }
         public void hh()
         {
-            string bintIp = "220.69.249.226";
+            string bintIp = "220.69.249.231";
             const int bindPort = 4000;
             TcpListener server = null;
             //서버주소 바인딩(ip번호, port번호)
@@ -57,7 +57,7 @@ namespace winform_real_server
                 ArrayList sss2 = new ArrayList();
 
                 data = Encoding.Default.GetString(bytes, 0, length);// 데이터 수신
-                sss.Add(string.Format("수신 : {0} ", data));
+                //sss.Add(string.Format("수신 : {0} ", data));
                 textBox2.Text = data;
                 if (data == "ㅎㅇ")
                 {

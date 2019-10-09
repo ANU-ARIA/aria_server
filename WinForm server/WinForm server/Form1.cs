@@ -14,7 +14,7 @@ namespace WinForm_server
 {
     public partial class Form1 : Form
     {
-        public static int bb = Convert.ToInt32(603);
+        public static int bb = Convert.ToInt32(611);
         public Form1()
         {
             InitializeComponent();
@@ -23,23 +23,21 @@ namespace WinForm_server
         private void button1_Click(object sender, EventArgs e)
         {
             string bindIp = "220.69.249.231";
-            string serverIp = "220.69.249.226";
+            string serverIp = "220.69.249.231";
             const int serverPort = 4000;
 
             Form1.bb += 1;
-
-
-
             string message;
-
-
 
             message = textBox1.Text;
             IPEndPoint clientAddress = new IPEndPoint(IPAddress.Parse(bindIp), Form1.bb);
             IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(serverIp), serverPort);
 
+            // 클라이언트 IP, 포트번호로 객체 생성 후 연결(Connect)
             TcpClient client = new TcpClient(clientAddress);
             client.Connect(serverAddress);
+
+
             byte[] data = System.Text.Encoding.Default.GetBytes(message);
             NetworkStream stream = client.GetStream();
             stream.Write(data, 0, data.Length);
