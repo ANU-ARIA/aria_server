@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{67E530F1-A246-43F4-ADB8-8652E01C50EB}</ProjectGuid>
+    <ProjectGuid>{6BED6138-E29F-46E4-9F6A-0164C6B8A985}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>winform_real_server</RootNamespace>
     <AssemblyName>winform real server</AssemblyName>
@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
