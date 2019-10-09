@@ -22,7 +22,7 @@ namespace WinForm_server
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string bindIp = "220.69.249.226";
+            string bindIp = "220.69.249.231";
             string serverIp = "220.69.249.226";
             const int serverPort = 4000;
 
@@ -54,6 +54,11 @@ namespace WinForm_server
 
             stream.Close();
             client.Close();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
