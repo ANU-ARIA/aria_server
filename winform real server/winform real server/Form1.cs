@@ -16,7 +16,9 @@ namespace winform_real_server
 {
     public partial class Form1 : Form
     {
-        MySQLDB mySQLDB = new MySQLDB();
+        UserDAO userDao = new UserDAO();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -70,11 +72,20 @@ namespace winform_real_server
                 // data_arr [1] = user_id, [2] = pass_word, [3] = level, [4] = e_mail, [5] = first_name, [6] = last_name
                 data_arr = data.Split(',');
 
+                UserDto userDto = new UserDto();
+                userDto.user_id = data_arr[1];
+                userDto.pass_word = data_arr[2];
+                userDto.level = data_arr[3];
+                userDto.e_mail = data_arr[4];
+                userDto.first_name = data_arr[5];
+                userDto.last_name = data_arr[6];
+
                 if (Ddta == "{{#!") // 모델 프로토콜
                 {
                     if(Ddta2 == "!") // 모델 insert
                     {
-                        mySQLDB.Insert(data_arr[1], data_arr[2], int.Parse(data_arr[3]), data_arr[4], data_arr[5], data_arr[6]);
+                        //UserDto userDto = new UserDto(data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5], data_arr[6]);
+                        userDao.Insert(userDto);
                         data = "insert 받았습니다~";
                         byte[] msg = Encoding.Default.GetBytes(data);
                         stream.Write(msg, 0, msg.Length); // 데이터 송신
@@ -83,7 +94,7 @@ namespace winform_real_server
                     else if(Ddta2 == "@") // 모델 delete
                     {
                         // user_id 기준 삭제
-                        mySQLDB.Delete(data_arr[1]);
+                        userDao.Delete(data_arr[1]);
                         data = "delete 받았습니다~";
                         byte[] msg = Encoding.Default.GetBytes(data);
                         stream.Write(msg, 0, msg.Length); // 데이터 송신
@@ -92,7 +103,7 @@ namespace winform_real_server
                     else if(Ddta2 == "#") // 모델 update
                     {
                         // data_arr[1] = 수정하기 전이름, update_user_id = 수정한 후 이름
-                        mySQLDB.Update(data_arr[1], update_user_id);
+                        userDao.Update(data_arr[1], update_user_id);
                         data = "update 받았습니다~";
                         byte[] msg = Encoding.Default.GetBytes(data);
                         stream.Write(msg, 0, msg.Length); // 데이터 송신
@@ -100,7 +111,7 @@ namespace winform_real_server
                     }
                     else if(Ddta2 == "$") // 모델 select
                     {
-                        mySQLDB.Selection();
+                        userDao.Selection();
                         data = "select 받았습니다~";
                         byte[] msg = Encoding.Default.GetBytes(data);
                         stream.Write(msg, 0, msg.Length); // 데이터 송신
