@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB_MGR.cs" />
     <Compile Include="DB_TBL_LINE.cs" />
     <Compile Include="DB_TBL_LOT.cs" />
     <Compile Include="DB_TBL_MODEL.cs" />
