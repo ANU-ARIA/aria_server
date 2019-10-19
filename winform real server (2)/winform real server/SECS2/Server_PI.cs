@@ -13,7 +13,9 @@ namespace MES_COMM_PI
         Rejected = 5, No_object_exists = 6
     }
 
-    class CommPI
+    public enum eCMD { link_test_req = 1, link_test_rsp = 2, user = 3, separate_req = 5   };
+
+    class Server_PI
     {
         private int m_nSystemByte = 0;
 
@@ -49,29 +51,25 @@ namespace MES_COMM_PI
 
             // client_stream.Wirte( sMsg );
 
-            return 0;
+            return nErr;
         }
 
         public int Send_HostCommand(string _HostCmd, List<SECS2_XML_MESSAGEBODYCMD_PARAM> _CmdParams)
         {
             int nErr = 0;
 
-            SECS2_XML_MESSAGE _msg = new SECS2_XML_MESSAGE();
-            _msg.HEAD.SystemByte = MakeSystemByte();
-            _msg.HEAD.CMD = 3;
-            _msg.HEAD.Stream = 2;
-            _msg.HEAD.Function = 41;
+            SECS2_XML_MESSAGE Packet = new SECS2_XML_MESSAGE(MakeSystemByte(), (byte)eCMD.user, 2, 41);
 
-            _msg.BODY.RCMD = _HostCmd;
+            Packet.BODY.RCMD = _HostCmd;
             int i = 0;
             foreach (SECS2_XML_MESSAGEBODYCMD_PARAM it in _CmdParams )
             {
-                _msg.BODY.PARAMETERS[i].CPNAME  = it.CPNAME;
-                _msg.BODY.PARAMETERS[i].CPVALUE = it.CPVALUE;
+                Packet.BODY.PARAMETERS[i].CPNAME  = it.CPNAME;
+                Packet.BODY.PARAMETERS[i].CPVALUE = it.CPVALUE;
                 i++;
             }
 
-            nErr = Send(_msg);
+            nErr = Send(Packet);
 
             return nErr;
         }
@@ -79,15 +77,11 @@ namespace MES_COMM_PI
         public int Send_EventReportAck(eACKC6 _nACKC6)
         {
             int nErr = 0;
-            SECS2_XML_MESSAGE _msg = new SECS2_XML_MESSAGE();
-            _msg.HEAD.SystemByte = MakeSystemByte();
-            _msg.HEAD.CMD = 3;
-            _msg.HEAD.Stream = 6;
-            _msg.HEAD.Function = 12;
+            SECS2_XML_MESSAGE Packet = new SECS2_XML_MESSAGE(MakeSystemByte(), (byte)eCMD.user, 6, 12);
 
-            _msg.BODY.ACKC6 = (int)_nACKC6;            
+            Packet.BODY.ACKC6 = (int)_nACKC6;            
 
-            nErr = Send(_msg);
+            nErr = Send(Packet);
             return nErr;
         }
     }

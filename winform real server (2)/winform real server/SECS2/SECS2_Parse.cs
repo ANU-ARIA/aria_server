@@ -45,11 +45,11 @@ namespace MES_COMM_PI.SECS2
             xml.LoadXml(_sXml);
 
             // Head
-            XmlNodeList Node_Head = xml.GetElementsByTagName("HEAD");
+            XmlNodeList node_list = xml.GetElementsByTagName("SECS2_XML_MESSAGE");
 
-            foreach (XmlNode node in Node_Head)
+            foreach (XmlNode node in node_list)
             {
-                string sValue = node["SystemByte"].InnerText;
+                //string sValue = node["HEAD"].GetElementsByTagName
             }
             // systembyte
            

@@ -65,7 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SECS2\CommPI.cs" />
+    <Compile Include="SECS2\Server_PI.cs" />
     <Compile Include="DB\DB_MGR.cs" />
     <Compile Include="DB\DB_TBL_LINE.cs" />
     <Compile Include="DB\DB_TBL_LOT.cs" />

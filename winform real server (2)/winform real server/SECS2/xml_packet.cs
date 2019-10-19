@@ -15,21 +15,30 @@ namespace MES_COMM_PI.SECS2
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
     public partial class SECS2_XML_MESSAGE
     {
+        public SECS2_XML_MESSAGE(){ }
 
-        private SECS2_XML_MESSAGEHEAD hEADField;
+        public SECS2_XML_MESSAGE(int _nSystemByte, byte _nCmd, byte _nS, byte _nF)
+        {
+            this.HEAD.SystemByte = _nSystemByte;
+            this.HEAD.CMD        = _nCmd;
+            this.HEAD.Stream     = _nS;
+            this.HEAD.Function   = _nF;
+        }
 
-        private SECS2_XML_MESSAGEBODY bODYField;
+        private SECS2_XML_MESSAGEHEAD HEADField;
+
+        private SECS2_XML_MESSAGEBODY BODYField;
 
         /// <remarks/>
         public SECS2_XML_MESSAGEHEAD HEAD
         {
             get
             {
-                return this.hEADField;
+                return this.HEADField;
             }
             set
             {
-                this.hEADField = value;
+                this.HEADField = value;
             }
         }
 
@@ -38,11 +47,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.bODYField;
+                return this.BODYField;
             }
             set
             {
-                this.bODYField = value;
+                this.BODYField = value;
             }
         }
     }
@@ -54,24 +63,24 @@ namespace MES_COMM_PI.SECS2
     public partial class SECS2_XML_MESSAGEHEAD
     {
 
-        private int systemByteField;
+        private int SystemByteField;
 
-        private int cMDField;
+        private int CMDField;
 
-        private int streamField;
+        private int StreamField;
 
-        private int functionField;
+        private int FunctionField;
 
         /// <remarks/>
         public int SystemByte
         {
             get
             {
-                return this.systemByteField;
+                return this.SystemByteField;
             }
             set
             {
-                this.systemByteField = value;
+                this.SystemByteField = value;
             }
         }
 
@@ -80,11 +89,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.cMDField;
+                return this.CMDField;
             }
             set
             {
-                this.cMDField = value;
+                this.CMDField = value;
             }
         }
 
@@ -93,11 +102,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.streamField;
+                return this.StreamField;
             }
             set
             {
-                this.streamField = value;
+                this.StreamField = value;
             }
         }
 
@@ -106,11 +115,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.functionField;
+                return this.FunctionField;
             }
             set
             {
-                this.functionField = value;
+                this.FunctionField = value;
             }
         }
     }
@@ -122,34 +131,34 @@ namespace MES_COMM_PI.SECS2
     public partial class SECS2_XML_MESSAGEBODY
     {
 
-        private int aCKC6Field;
+        private int ACKC6Field;
 
-        private bool aCKC6FieldSpecified;
+        private bool ACKC6FieldSpecified;
 
-        private byte cEIDField;
+        private byte CEIDField;
 
-        private bool cEIDFieldSpecified;
+        private bool CEIDFieldSpecified;
 
-        private SECS2_XML_MESSAGEBODYREPORTS rEPORTSField;
+        private SECS2_XML_MESSAGEBODYREPORTS REPORTSField;
 
-        private int hCACKField;
+        private int HCACKField;
 
-        private bool hCACKFieldSpecified;
+        private bool HCACKFieldSpecified;
 
-        private string rCMDField;
+        private string RCMDField;
 
-        private SECS2_XML_MESSAGEBODYCMD_PARAM[] pARAMETERSField;
+        private SECS2_XML_MESSAGEBODYCMD_PARAM[] PARAMETERSField;
 
         /// <remarks/>
         public int ACKC6
         {
             get
             {
-                return this.aCKC6Field;
+                return this.ACKC6Field;
             }
             set
             {
-                this.aCKC6Field = value;
+                this.ACKC6Field = value;
             }
         }
 
@@ -159,11 +168,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.aCKC6FieldSpecified;
+                return this.ACKC6FieldSpecified;
             }
             set
             {
-                this.aCKC6FieldSpecified = value;
+                this.ACKC6FieldSpecified = value;
             }
         }
 
@@ -172,11 +181,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.cEIDField;
+                return this.CEIDField;
             }
             set
             {
-                this.cEIDField = value;
+                this.CEIDField = value;
             }
         }
 
@@ -186,11 +195,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.cEIDFieldSpecified;
+                return this.CEIDFieldSpecified;
             }
             set
             {
-                this.cEIDFieldSpecified = value;
+                this.CEIDFieldSpecified = value;
             }
         }
 
@@ -199,11 +208,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.rEPORTSField;
+                return this.REPORTSField;
             }
             set
             {
-                this.rEPORTSField = value;
+                this.REPORTSField = value;
             }
         }
 
@@ -212,11 +221,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.hCACKField;
+                return this.HCACKField;
             }
             set
             {
-                this.hCACKField = value;
+                this.HCACKField = value;
             }
         }
 
@@ -226,11 +235,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.hCACKFieldSpecified;
+                return this.HCACKFieldSpecified;
             }
             set
             {
-                this.hCACKFieldSpecified = value;
+                this.HCACKFieldSpecified = value;
             }
         }
 
@@ -239,11 +248,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.rCMDField;
+                return this.RCMDField;
             }
             set
             {
-                this.rCMDField = value;
+                this.RCMDField = value;
             }
         }
 
@@ -253,11 +262,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.pARAMETERSField;
+                return this.PARAMETERSField;
             }
             set
             {
-                this.pARAMETERSField = value;
+                this.PARAMETERSField = value;
             }
         }
     }
@@ -269,18 +278,18 @@ namespace MES_COMM_PI.SECS2
     public partial class SECS2_XML_MESSAGEBODYREPORTS
     {
 
-        private SECS2_XML_MESSAGEBODYREPORTSREPORT rEPORTField;
+        private SECS2_XML_MESSAGEBODYREPORTSREPORT REPORTField;
 
         /// <remarks/>
         public SECS2_XML_MESSAGEBODYREPORTSREPORT REPORT
         {
             get
             {
-                return this.rEPORTField;
+                return this.REPORTField;
             }
             set
             {
-                this.rEPORTField = value;
+                this.REPORTField = value;
             }
         }
     }
@@ -292,20 +301,20 @@ namespace MES_COMM_PI.SECS2
     public partial class SECS2_XML_MESSAGEBODYREPORTSREPORT
     {
 
-        private ushort rEPORTIDField;
+        private ushort REPORTIDField;
 
-        private string[] vARIABLESField;
+        private string[] VARIABLESField;
 
         /// <remarks/>
         public ushort REPORTID
         {
             get
             {
-                return this.rEPORTIDField;
+                return this.REPORTIDField;
             }
             set
             {
-                this.rEPORTIDField = value;
+                this.REPORTIDField = value;
             }
         }
 
@@ -315,11 +324,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.vARIABLESField;
+                return this.VARIABLESField;
             }
             set
             {
-                this.vARIABLESField = value;
+                this.VARIABLESField = value;
             }
         }
     }
@@ -331,20 +340,20 @@ namespace MES_COMM_PI.SECS2
     public partial class SECS2_XML_MESSAGEBODYCMD_PARAM
     {
 
-        private string cPNAMEField;
+        private string CPNAMEField;
 
-        private string cPVALUEField;
+        private string CPVALUEField;
 
         /// <remarks/>
         public string CPNAME
         {
             get
             {
-                return this.cPNAMEField;
+                return this.CPNAMEField;
             }
             set
             {
-                this.cPNAMEField = value;
+                this.CPNAMEField = value;
             }
         }
 
@@ -353,11 +362,11 @@ namespace MES_COMM_PI.SECS2
         {
             get
             {
-                return this.cPVALUEField;
+                return this.CPVALUEField;
             }
             set
             {
-                this.cPVALUEField = value;
+                this.CPVALUEField = value;
             }
         }
     }
