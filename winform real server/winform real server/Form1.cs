@@ -82,7 +82,7 @@ namespace winform_real_server
 
                 if (Ddta == "{{#!") // 모델 프로토콜
                 {
-                    if(Ddta2 == "!") // 모델 insert
+                    if (Ddta2 == "!") // 모델 insert
                     {
                         //UserDto userDto = new UserDto(data_arr[1], data_arr[2], data_arr[3], data_arr[4], data_arr[5], data_arr[6]);
                         userDao.Insert(userDto);
@@ -91,7 +91,7 @@ namespace winform_real_server
                         stream.Write(msg, 0, msg.Length); // 데이터 송신
                         textBox3.Text = data;
                     }
-                    else if(Ddta2 == "@") // 모델 delete
+                    else if (Ddta2 == "@") // 모델 delete
                     {
                         // user_id 기준 삭제
                         userDao.Delete(data_arr[1]);
@@ -100,7 +100,7 @@ namespace winform_real_server
                         stream.Write(msg, 0, msg.Length); // 데이터 송신
                         textBox3.Text = data;
                     }
-                    else if(Ddta2 == "#") // 모델 update
+                    else if (Ddta2 == "#") // 모델 update
                     {
                         // data_arr[1] = 수정하기 전이름, update_user_id = 수정한 후 이름
                         userDao.Update(data_arr[1], update_user_id);
@@ -109,7 +109,7 @@ namespace winform_real_server
                         stream.Write(msg, 0, msg.Length); // 데이터 송신
                         textBox3.Text = data;
                     }
-                    else if(Ddta2 == "$") // 모델 select
+                    else if (Ddta2 == "$") // 모델 select
                     {
                         userDao.Selection();
                         data = "select 받았습니다~";
@@ -140,7 +140,7 @@ namespace winform_real_server
 
             }
         }
-            private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
