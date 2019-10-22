@@ -38,9 +38,32 @@ namespace MES_COMM_PI
         }
         public void OnReceive(string _rcv_msg)
         {
-            SECS2_XML_MESSAGE item = new SECS2_XML_MESSAGE();
-
-            m_parser.LoadXml(_rcv_msg, ref item);
+            /*
+             * _rcv_msg =   
+             * <SECS2_XML_MESSAGE>
+             *   <HEAD>
+             *     <SystemByte> 00002 </SystemByte>
+             *     <CMD> 3 </CMD>
+             *     <Stream> 6 </Stream>
+             *     <Function> 11 </Function>
+             *   </HEAD>
+             *   <BODY>
+             *     <CEID> 1 </CEID>
+             *     <REPORTS>
+             *       <REPORT>
+             *         <REPORTID> 1000 </REPORTID>
+             *         <VARIABLES>
+             *           <V> 25.0 </V>
+             *           <V> 50.0 </V>
+             *           <V> PASS </V>
+             *         </VARIABLES>
+             *       </REPORT>
+             *     </REPORTS>
+             *   </BODY>
+             * </SECS2_XML_MESSAGE>
+             */
+            SECS2_XML_MESSAGE it = new SECS2_XML_MESSAGE();
+            m_parser.LoadXml(_rcv_msg, ref it);  
         }
 
         private int Send(SECS2_XML_MESSAGE _msg)

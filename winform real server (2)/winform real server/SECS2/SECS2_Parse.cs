@@ -25,13 +25,38 @@ namespace MES_COMM_PI.SECS2
             return sXml;
         }
 
-        private string MakeXml_S2F41(SECS2_XML_MESSAGE _packet)
+
+
+        private string MakeXml_S2F41(SECS2_XML_MESSAGE _packet) // @김동우
         {
             string sXml = "";
+
+            // PacketS
+            {
+                // Head
+                {
+                    // SystemBytem
+                    // CMD
+                    // Stream
+                    // Fucntion
+                }
+                // Body
+                {
+                    // RCMD
+                    // PARAMETERS
+                    {
+                        // CMD_PARAM n개
+                        {
+                            // CPNAME
+                            // CPVALUE
+                        }
+                    }
+                }
+            }
             return sXml;
         }
 
-        private string MakeXml_S6F12(SECS2_XML_MESSAGE _msg)
+        private string MakeXml_S6F12(SECS2_XML_MESSAGE _msg) // @신수영
         {
             string sXml = "";
             return sXml;
@@ -44,24 +69,29 @@ namespace MES_COMM_PI.SECS2
             XmlDocument xml = new XmlDocument();
             xml.LoadXml(_sXml);
 
-            // Head
-            XmlNodeList node_list = xml.GetElementsByTagName("SECS2_XML_MESSAGE");
-
-            foreach (XmlNode node in node_list)
+            int nS = 0, nF = 0;
+            // Head (@김성현)
             {
-                //string sValue = node["HEAD"].GetElementsByTagName
+                // systembyte
+                // cmd
+                // stream
+                // function
             }
-            // systembyte
-           
-            // cmd
-            // stream
-            // function
 
             // Body
-            // s2f42, host command ack
+            // s2f42, host command ack (@김성현)
+            if( nS == 2 && nF == 42)
+            {
+                // HCACK
+            }
 
-            // s6f11, event report
-
+            // s6f11, event report (@김동우)
+            if( nS == 6 && nF == 11)
+            {
+                // CEID
+                // RPTID
+                // Vs
+            }
             return nErr;
         }
     }
