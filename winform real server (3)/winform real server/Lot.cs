@@ -9,8 +9,8 @@ namespace winform_real_server
 {
     class Lot // Lot 지시 클래스
     {
-        Form1 ff;
-        public Lot(Form1 fe)
+        fmMain ff;
+        public Lot(fmMain fe)
         {
             ff = fe;
         }

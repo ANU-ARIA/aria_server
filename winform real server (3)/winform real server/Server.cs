@@ -10,14 +10,14 @@ namespace winform_real_server
 {
     class Server
     {
-        Form1 fm;
+        fmMain fm;
         public static string bintIp = "220.69.249.226";
         const int bindPort = 4000;
         
         public static IPEndPoint localAddress = new IPEndPoint(IPAddress.Parse(bintIp), bindPort);
         public static TcpListener server = new TcpListener(localAddress);
 
-        public Server(Form1 ff)
+        public Server(fmMain ff)
         {
             fm = ff;
         }

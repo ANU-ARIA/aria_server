@@ -72,11 +72,11 @@
     <Compile Include="DB\DB_TBL_MODEL.cs" />
     <Compile Include="DB\DB_TBL_PRODUCTS.cs" />
     <Compile Include="DB\DB_USERS.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="fmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="fmMain.Designer.cs">
+      <DependentUpon>fmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\Req_User_Log_In.cs" />
     <Compile Include="Lot.cs" />
@@ -86,8 +86,8 @@
     <Compile Include="SECS2\SECS2_Parse.cs" />
     <Compile Include="SECS2\xml_packet.cs" />
     <Compile Include="Server.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="fmMain.resx">
+      <DependentUpon>fmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -15,10 +15,17 @@ namespace MES_COMM_PI.SECS2
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
     public partial class SECS2_XML_MESSAGE
     {
-        public SECS2_XML_MESSAGE(){ }
+        public SECS2_XML_MESSAGE()
+        {
+            this.HEAD = new SECS2_XML_MESSAGEHEAD();
+            this.BODY = new SECS2_XML_MESSAGEBODY();
+        }
 
         public SECS2_XML_MESSAGE(int _nSystemByte, byte _nCmd, byte _nS, byte _nF)
         {
+            this.HEAD = new SECS2_XML_MESSAGEHEAD();
+            this.BODY = new SECS2_XML_MESSAGEBODY();
+
             this.HEAD.SystemByte = _nSystemByte;
             this.HEAD.CMD        = _nCmd;
             this.HEAD.Stream     = _nS;
@@ -159,6 +166,7 @@ namespace MES_COMM_PI.SECS2
             set
             {
                 this.ACKC6Field = value;
+                this.ACKC6FieldSpecified = true;
             }
         }
 
@@ -177,7 +185,7 @@ namespace MES_COMM_PI.SECS2
         }
 
         /// <remarks/>
-        public byte[] CEID
+        public byte CEID
         {
             get
             {
@@ -186,6 +194,7 @@ namespace MES_COMM_PI.SECS2
             set
             {
                 this.CEIDField = value;
+                this.CEIDFieldSpecified = true;
             }
         }
 
@@ -226,6 +235,7 @@ namespace MES_COMM_PI.SECS2
             set
             {
                 this.HCACKField = value;
+                this.HCACKFieldSpecified = true;
             }
         }
 

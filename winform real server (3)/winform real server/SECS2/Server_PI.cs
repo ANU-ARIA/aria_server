@@ -17,7 +17,7 @@ namespace MES_COMM_PI
 
     class Server_PI
     {
-        private int m_nSystemByte = 0;
+        private static int m_nSystemByte = 0;
 
         private SECS2_Parse m_parser = new SECS2_Parse();
 
@@ -36,7 +36,7 @@ namespace MES_COMM_PI
             if (m_nSystemByte > 9999999) m_nSystemByte = 0;
             return m_nSystemByte++;
         }
-        public void OnReceive(string _rcv_msg)
+        public void OnReceive(string _rcv_msg, ref SECS2_XML_MESSAGE _it)
         {
             /*
              * _rcv_msg =   
@@ -62,49 +62,52 @@ namespace MES_COMM_PI
              *   </BODY>
              * </SECS2_XML_MESSAGE>
              */
-            SECS2_XML_MESSAGE it = new SECS2_XML_MESSAGE();
-            m_parser.LoadXml(_rcv_msg, ref it);  
+            m_parser.ParseXml(_rcv_msg, ref _it);  
         }
 
-        private int Send(SECS2_XML_MESSAGE _msg)
+        private int do_Send(SECS2_XML_MESSAGE _packet)
         {
             int nErr = 0;
 
-            string sMsg = m_parser.MakeXml(_msg);
+            string sMsg = m_parser.MakeXml(_packet);
 
+            // socket stream writer로 write 해준다.
             // client_stream.Wirte( sMsg );
 
             return nErr;
         }
 
-        public int Send_HostCommand(string _HostCmd, List<SECS2_XML_MESSAGEBODYCMD_PARAM> _CmdParams)
+        public int Send_S2F41_HostCommand(string _HostCmd, List<SECS2_XML_MESSAGEBODYCMD_PARAM> _CmdParams)
         {
             int nErr = 0;
 
             SECS2_XML_MESSAGE Packet = new SECS2_XML_MESSAGE(MakeSystemByte(), (byte)eCMD.user, 2, 41);
 
             Packet.BODY.RCMD = _HostCmd;
+
+            Packet.BODY.PARAMETERS = new SECS2_XML_MESSAGEBODYCMD_PARAM[_CmdParams.Count()];
             int i = 0;
             foreach (SECS2_XML_MESSAGEBODYCMD_PARAM it in _CmdParams )
             {
-                Packet.BODY.PARAMETERS[i].CPNAME  = it.CPNAME;
-                Packet.BODY.PARAMETERS[i].CPVALUE = it.CPVALUE;
+                // Packet.BODY.PARAMETERS[i].CPNAME  = it.CPNAME;
+                // Packet.BODY.PARAMETERS[i].CPVALUE = it.CPVALUE;
+                Packet.BODY.PARAMETERS[i] = it;
                 i++;
             }
 
-            nErr = Send(Packet);
+            nErr = do_Send(Packet);
 
             return nErr;
         }
 
-        public int Send_EventReportAck(eACKC6 _nACKC6)
+        public int Send_S6F12_EventReportAck(eACKC6 _nACKC6)
         {
             int nErr = 0;
             SECS2_XML_MESSAGE Packet = new SECS2_XML_MESSAGE(MakeSystemByte(), (byte)eCMD.user, 6, 12);
 
-            Packet.BODY.ACKC6 = (int)_nACKC6;            
+            Packet.BODY.ACKC6 = (int)_nACKC6;
 
-            nErr = Send(Packet);
+            nErr = do_Send(Packet);
             return nErr;
         }
     }

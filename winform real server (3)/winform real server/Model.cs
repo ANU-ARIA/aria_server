@@ -11,7 +11,7 @@ namespace winform_real_server
 
     class Model // 모델 클래스
     {
-        Form1 Fm;
+        fmMain Fm;
 
 
 
@@ -25,7 +25,7 @@ namespace winform_real_server
         public string f_mode_humidity;
         public static string All_se;
 
-        public Model(Form1 mF)
+        public Model(fmMain mF)
         {
             Fm = mF;
         }

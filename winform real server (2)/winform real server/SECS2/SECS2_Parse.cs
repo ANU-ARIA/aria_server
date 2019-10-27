@@ -257,14 +257,11 @@ namespace MES_COMM_PI.SECS2
             // s6f11, event report (@김동우)
             if( nS == 6 && nF == 11)
             {
-                foreach (XmlNode node in BODY_IN)
-                {
-                    _rVal.BODY.CEID = System.Text.Encoding.Default.GetBytes(node["CEID"].InnerText); // 그냥 byte였는데 byte[]로 바꿈
-                }
+                
                 // CEID
                 foreach (XmlNode node in REPORT_IN)
                 {
-                    _rVal.BODY.REPORTS = node["REPORTID"].InnerText; // string을 class로 변환?
+                   // _rVal.BODY.REPORTS = node["REPORTID"].InnerText; // string을 class로 변환?
                 }
                 // RPTID
                 foreach (XmlNode node in VARIABLES_IN)
@@ -275,7 +272,7 @@ namespace MES_COMM_PI.SECS2
                 {
                     for (int e = 0; e < Vs.Count; e++)
                     {
-                        _rVal.BODY.REPORTS.REPORT.VARIABLES[e].V = Vs[e]; // v는 없으면 생성?
+                        //_rVal.BODY.REPORTS.REPORT.VARIABLES[e].V = Vs[e]; // v는 없으면 생성?
                     }
                 }
                 // Vs
