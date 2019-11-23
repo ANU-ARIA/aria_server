@@ -19,7 +19,7 @@ namespace winform_real_server
         public static void Line1_Insert(ref DB_TBL_LINE1 Line1) // Model Insert 메소드
         {
             conn.Open(); // Mysql Open
-            string Line1_Insert_Sql = "INSERT INTO TBL_LINE (_id, aname, state, working_lot, line_temp, line_humidity) VALUES('" + Line1._Id + "','" + Line1.Name + "','" + Line1.State + "','" + Line1.Working_Lot + "','" + Line1.Line_Temp + "','" + Line1.Line_Humidity + "');"; // Insert 쿼리문
+            string Line1_Insert_Sql = "INSERT INTO TBL_LINE (_id, aname, state, working_lot, line_temp, line_humidity) VALUES('" + Line1._Id + "','" + Line1.Oper_name + "','" + Line1.State + "','" + Line1.Working_Lot + "','" + Line1.Line_Temp + "','" + Line1.Line_Humidity + "');"; // Insert 쿼리문
             MySqlCommand Command_Line1_Insert = new MySqlCommand(Line1_Insert_Sql, conn); // Insert Command문
             Command_Line1_Insert.ExecuteNonQuery(); // Insert 실행
             conn.Close(); // mysql Close
@@ -32,10 +32,28 @@ namespace winform_real_server
             Command_Line1_Name_Update.ExecuteNonQuery();
             conn.Close();
         }
-        public static void Line1_State_Update(string _id, string working) // Line1 State 작업중 메소드
+        public static void Line_Update(ref DB_TBL_LINE1 line) // Line1 State 작업중 메소드
         {
             conn.Open();
-            string Line1_State_Update_Sql0 = "update TBL_LINE set state = '" + working + "' where _id = '" + _id + "';";
+            string Line1_State_Update_Sql0 = "update TBL_LINE set _id = '" + line._Id + "', oper_name = '"+line.Oper_name+"'," +
+                "state = 'working' where line_id = '" + line.Line_id + "';";
+            MySqlCommand Command_Line1_State_Update0 = new MySqlCommand(Line1_State_Update_Sql0, conn);
+            Command_Line1_State_Update0.ExecuteNonQuery();
+            conn.Close();
+        }
+        public static void Line_Update2(ref DB_TBL_LINE1 line)
+        {
+            conn.Open();
+            string Line1_State_Update_Sql0 = "update TBL_LINE set line_temp = '" + line.Line_Temp + "', line_humidity = '"+line.Line_Humidity+"' " +
+                "where line_id = '" + line.Line_id + "';";
+            MySqlCommand Command_Line1_State_Update0 = new MySqlCommand(Line1_State_Update_Sql0, conn);
+            Command_Line1_State_Update0.ExecuteNonQuery();
+            conn.Close();
+        }
+        public static void Line_Update3(ref DB_TBL_LINE1 line)
+        {
+            conn.Open();
+            string Line1_State_Update_Sql0 = "update TBL_LINE set _id = null, oper_name = null, state = 'wating' where line_id = '" + line.Line_id + "';";
             MySqlCommand Command_Line1_State_Update0 = new MySqlCommand(Line1_State_Update_Sql0, conn);
             Command_Line1_State_Update0.ExecuteNonQuery();
             conn.Close();
@@ -136,12 +154,13 @@ namespace winform_real_server
                 //     Reader_Lot_All_Select["product_fail_rate_warn"].ToString() + " " + Reader_Lot_All_Select["product_color"].ToString() + " " + Reader_Lot_All_Select["temp_margin"].ToString() + " " + Reader_Lot_All_Select["humid_margin"].ToString() + " " + Reader_Lot_All_Select["oper_id"].ToString() +
                 //      Reader_Lot_All_Select["working_state"].ToString() + " " + Reader_Lot_All_Select["lot_created_time"].ToString() + " " + Reader_Lot_All_Select["lot_start_time"].ToString() + " " + Reader_Lot_All_Select["lot_end_time"].ToString()); // 모든 정보 ArrayList 담기
             }
+            conn.Close();
         }
         /////////////////
         public static void Products_Insert(ref DB_TBL_PRODUCTS Products) // Products Insert 메소드
         {
             conn.Open(); // Mysql Open
-            string Products_Insert_Sql = "INSERT INTO TBL_PRODUCTS (_id, model, line_id, lot_id, working_state, insp_time) VALUES(" + Products._Id + ",'" + Products.Model + "','" + Products.Line_Id + "','" + Products.Lot_Id + "',0,now());"; // Insert 쿼리문
+            string Products_Insert_Sql = "INSERT INTO TBL_PRODUCTS (_id, model, line_id, lot_id, working_state) VALUES(" + Products._Id + ",'" + Products.Model + "','" + Products.Line_Id + "','" + Products.Lot_Id + "',0);"; // Insert 쿼리문
             MySqlCommand Command_Products_Insert = new MySqlCommand(Products_Insert_Sql, conn); // Insert Command문
             Command_Products_Insert.ExecuteNonQuery(); // Insert 실행
             conn.Close(); // mysql Close
@@ -151,6 +170,31 @@ namespace winform_real_server
             conn.Open();
             string Products_Update_Sql = "update TBL_PRODUCTS set model_temp = " + Products.Model_Temp + ", model_humidity = " + Products.Model_Humidity + ", insp_result = '" + Products.Insp_Result + "', fail_reason = '" + Products.Fail_Reason + "'," +
                 "insp_time = now() where _id = " + Products._Id + ";";
+            MySqlCommand Command_Products_Update = new MySqlCommand(Products_Update_Sql, conn);
+            Command_Products_Update.ExecuteNonQuery();
+            conn.Close();
+        }
+        public static void Products_Update2(ref DB_TBL_PRODUCTS Products)
+        {
+            try
+            {
+                conn.Open();
+                string Products_Update_Sql = "update TBL_PRODUCTS set model_temp = " + Products.Model_Temp + ", model_humidity = " + Products.Model_Humidity + ", " +
+                    "working_state = '" + Products.Working_State + "', insp_result = '" + Products.Insp_Result + "', fail_reason = '" + Products.Fail_Reason + "'," +
+                    "insp_time = now() where _id = " + Products._Id + " and lot_id = '" + Products.Lot_Id + "';";
+                MySqlCommand Command_Products_Update = new MySqlCommand(Products_Update_Sql, conn);
+                Command_Products_Update.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch(Exception gh)
+            {
+                conn.Close();
+            }
+        }
+        public static void Products_Update3(ref DB_TBL_PRODUCTS Products)
+        {
+            conn.Open();
+            string Products_Update_Sql = "update TBL_PRODUCTS set working_state = 2 where _id = " + Products._Id + " and lot_id = '" + Products.Lot_Id + "';";
             MySqlCommand Command_Products_Update = new MySqlCommand(Products_Update_Sql, conn);
             Command_Products_Update.ExecuteNonQuery();
             conn.Close();

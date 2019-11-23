@@ -12,7 +12,5 @@ namespace winform_real_server
         public static string level;
         public static string right;
         public static string nak_reason;
-
-
     }
 }
